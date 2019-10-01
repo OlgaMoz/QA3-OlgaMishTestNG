@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 public class LoginPageTests extends TestBase{
 
 
@@ -13,7 +11,7 @@ public class LoginPageTests extends TestBase{
     public void loginPositiveTest() throws InterruptedException {
 
         initLoginTestsStart();
-        initLoginTestsEnd(LOGIN, PASSWORD);
+        initLoginTests(LOGIN, PASSWORD);
 
         WebElement profileIcon = driver.findElement(By.id("profile"));
 
@@ -27,7 +25,7 @@ public class LoginPageTests extends TestBase{
     public void loginNegativeTest() throws InterruptedException {
 
         initLoginTestsStart();
-        initLoginTestsEnd(LOGIN, "Olga1");
+        initLoginTests(LOGIN, "Olga1");
         String message = driver.findElement(By.id("wrongloginorpassword")).getText();
         System.out.println("Message 'Wrong Authorization!' is visible: " + message.contains("Wrong Authorization!"));
         WebElement closeSignIn =driver.findElement(By.id("closedsignin"));

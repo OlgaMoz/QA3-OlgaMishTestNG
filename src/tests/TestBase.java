@@ -33,7 +33,10 @@ public class TestBase {
         Thread.sleep(2000);
 
     }
-    public void initLoginTestsEnd(String login, String passw) throws InterruptedException {
+    public void initLoginTests(String login, String passw) throws InterruptedException {
+        WebElement loginIcon = driver.findElement(By.id("idsignin"));
+        loginIcon.click();
+        Thread.sleep(2000);
         driver.findElement(By.id("logininput")).sendKeys(login);
         driver.findElement(By.id("passwordinput")).sendKeys(passw);
         WebElement signInButton = driver.findElement(By.id("signinrequest"));

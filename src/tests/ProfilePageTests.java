@@ -11,7 +11,7 @@ public class ProfilePageTests extends TestBase{
 
         //-------------Login--------------
         initLoginTestsStart();
-        initLoginTestsEnd(LOGIN, PASSWORD);
+        initLoginTests(LOGIN, PASSWORD);
         //---------------Go to the Profile Page -----------------
         openElementById("profile", 3000);
         //-------------- Open in edit mode ----------------------
@@ -34,7 +34,7 @@ public class ProfilePageTests extends TestBase{
     @Test
     public void profileAndFamilyPageComparing() throws InterruptedException {
         initLoginTestsStart();
-        initLoginTestsEnd(LOGIN,PASSWORD);
+        initLoginTests(LOGIN,PASSWORD);
         //---------------Save data from the Profile page-------------
         //---------------Go to the Profile Page -----------------
         openElementById("profile", 3000);
