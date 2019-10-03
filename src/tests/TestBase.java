@@ -33,6 +33,7 @@ public class TestBase {
         Thread.sleep(2000);
 
     }
+
     public void initLoginTests(String login, String passw) throws InterruptedException {
         WebElement loginIcon = driver.findElement(By.id("idsignin"));
         loginIcon.click();
