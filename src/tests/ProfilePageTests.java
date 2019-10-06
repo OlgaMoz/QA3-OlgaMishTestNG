@@ -7,37 +7,44 @@ import org.testng.annotations.Test;
 public class ProfilePageTests extends TestBase{
 
     @Test
-    public void lastNameOfFamilyChanging() throws InterruptedException {
+    public void lastNameOfFamilyChanging() {
 
         //-------------Login--------------
-        initLoginTestsStart();
+       // initLoginTestsStart();
         initLoginTests(LOGIN, PASSWORD);
         //---------------Go to the Profile Page -----------------
-        openElementById("profile", 3000);
+        //openElementById("profile", 3000);
+        openElementById("profile");
+        waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 30);
         //-------------- Open in edit mode ----------------------
-        openElementById("idbtneditprofile", 5000);
+        //openElementById("idbtneditprofile", 5000);
+        openElementById("idbtneditprofile");
+        waitUntilElementIsVisible(By.id("helpselectinfoinprofile"), 30);
         //----------------New last name---------------------
         WebElement lastNameField = driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']//input"));
         // WebElement lastNameField = driver.findElement(By.id("fieldobjfamilyName"));
         lastNameField.click();
         lastNameField.clear();
         lastNameField.sendKeys("Shapirko");
-        Thread.sleep(7000);
+        //Thread.sleep(7000);
+
         //-----------------Save profile---------------------
         WebElement saver = driver.findElement(By.xpath("//div[@id='idbtnsaveprofile']"));
         String saver1 = saver.getText();
 
         System.out.println("Text saved: " + saver1);
         saver.click();
-        Thread.sleep(5000);
+        waitUntilElementIsVisible(By.id("idbtneditprofile"), 30);
+        //Thread.sleep(5000);
     }
     @Test
-    public void profileAndFamilyPageComparing() throws InterruptedException {
-        initLoginTestsStart();
+    public void profileAndFamilyPageComparing(){
+       // initLoginTestsStart();
         initLoginTests(LOGIN,PASSWORD);
         //---------------Save data from the Profile page-------------
         //---------------Go to the Profile Page -----------------
-        openElementById("profile", 3000);
+        openElementById("profile");
+        waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 30);
        /* driver.findElement(By.xpath("//i[@id='profile']")).click();
         Thread.sleep(3000);*/
         String profileConfession = driver.findElement(By.xpath("//span[@id='fieldobjconfession']")).getText();
@@ -60,7 +67,8 @@ public class ProfilePageTests extends TestBase{
         System.out.println("Profile family description: " + profileFamilyDescription);
 
         //---------------Go to the Family Page -----------------
-        openElementById("family", 3000);
+        openElementById("family");
+        waitUntilElementIsVisible(By.id("idnameuserinfamily"), 30);
         //----------------------Comparing--------------------------
         String familyConfession = driver.findElement(
                 By.cssSelector(".itemprofilefit #fieldobjconfession")).getText();

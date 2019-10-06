@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class HomePageTests extends TestBase {
     @Test
-    public void homePageVerificationTest() throws InterruptedException {
+    public void homePageVerificationTest(){
 
         // ------ Find list events element ----
         WebElement listEvent

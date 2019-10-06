@@ -22,7 +22,7 @@ public class LoginPageTests extends TestBase{
         Thread.sleep(10000);
     }
     @Test
-    public void loginNegativeTest() throws InterruptedException {
+    public void loginNegativeTest() {
 
         initLoginTestsStart();
         initLoginTests(LOGIN, "Olga1");

@@ -10,7 +10,10 @@ public class WebHomePageTests extends TestBase{
     public void webHomePageTest()  {
 
         WebElement eventList = driver.findElement(By.id("idtitletypesearchevents"));
-        System.out.println("List events element exists: " + eventList.getText().equals("List events"));
+
+       // System.out.println("List events element exists: " + eventList.getText().equals("List events"));
+        Assert.assertEquals(eventList.getText(), "List events",
+                "There is no element named \"List events\" on the page");
         WebElement loginIcon = driver.findElement(By.id("idsignin"));
         //System.out.println("Login Icon exists: " + loginIcon.getText().equals("Login"));
         Assert.assertEquals(loginIcon.getText(), "Login");

@@ -11,6 +11,8 @@ public class WebLoginPageTests extends TestBase{
 
         initLoginTests(LOGIN, PASSWORD);
 
+        waitUntilElementIsVisible(By.id("profile"), 30);
+
         WebElement profileIcon = driver.findElement(By.id("profile"));
 
         // ------ Check that we on the HomePage for authorized user---
@@ -24,6 +26,7 @@ public class WebLoginPageTests extends TestBase{
     public void webLoginNegativeTest() throws InterruptedException {
 
         initLoginTests(LOGIN, "Olga1");
+        waitUntilElementIsVisible(By.id("wrongloginorpassword"), 30);
         String message = driver.findElement(By.id("wrongloginorpassword")).getText();
         System.out.println("Message 'Wrong Authorization!' is visible: " + message.contains("Wrong Authorization!"));
         Assert.assertTrue(message.contains("Wrong Authorization!"));

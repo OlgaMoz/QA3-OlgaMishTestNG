@@ -11,13 +11,15 @@ public class WebProfilePageTests extends TestBase{
     @BeforeMethod
     public void startWorkProfilePage() throws InterruptedException {
         initLoginTests(LOGIN, PASSWORD);
-        openElementById("profile", 3000);
+        openElementById("profile");
+        waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 50);
     }
 
     @Test
     public void lastNameOfFamilyChanging() throws InterruptedException {
 
         //----------------New last name---------------------
+        Thread.sleep(5000);
         String profileFamilyName =driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']")).getText();
         System.out.println("profileFamilyName: " + profileFamilyName);
         String lastName;
@@ -25,7 +27,8 @@ public class WebProfilePageTests extends TestBase{
         if(!(profileFamilyName.equals("Abramov"))) {lastName = "Abramov";}
         System.out.println("lastName new: " + lastName);
         //-------------- Open in edit mode ----------------------
-        openElementById("idbtneditprofile", 5000);
+        openElementById("idbtneditprofile");
+        waitUntilElementIsVisible(By.id("helpselectinfoinprofile"), 50);
 
         WebElement lastNameField = driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']//input"));
         lastNameField.click();
@@ -36,6 +39,7 @@ public class WebProfilePageTests extends TestBase{
 
         //-----------------Save profile---------------------
         driver.findElement(By.xpath("//div[@id='idbtnsaveprofile']")).click();
+        waitUntilElementIsVisible(By.id("idbtneditprofile"), 30);
         Thread.sleep(5000);
         profileFamilyName =driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']")).getText();
         System.out.println("Family Name in the profile: " + profileFamilyName);
@@ -44,7 +48,11 @@ public class WebProfilePageTests extends TestBase{
     }
     @Test
     public void webProfileAndFamilyPageComparing() throws InterruptedException {
-
+       /* initLoginTests(LOGIN,PASSWORD);
+        //---------------Go to the Profile Page -----------------
+        openElementById("profile");
+        waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 30);*/
+        Thread.sleep(5000);
         //---------------Save data from the Profile page-------------
         String profileConfession = driver.findElement(By.xpath("//span[@id='fieldobjconfession']")).getText();
         System.out.println("Profile confession: " + profileConfession);
@@ -64,10 +72,13 @@ public class WebProfilePageTests extends TestBase{
         String profileFamilyDescription = driver.findElement(By.xpath
                 ("//div[@class= 'itemprofilearea']/span[@id='fieldobjfamilyDescription']")).getText();
         System.out.println("Profile family description: " + profileFamilyDescription);
-        Thread.sleep(3000);
+        Thread.sleep(10000);
 
         //---------------Go to the Family Page -----------------
-        openElementById("family", 3000);
+        //openElementById("family", 3000);
+        openElementById("family");
+        Thread.sleep(10000);
+        waitUntilElementIsVisible(By.id("idnameuserinfamily"), 70);
         //----------------------Comparing--------------------------
         String familyConfession = driver.findElement(
                 By.cssSelector(".itemprofilefit #fieldobjconfession")).getText();
