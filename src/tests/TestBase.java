@@ -78,4 +78,13 @@ public class TestBase {
     public void waitUntilElementContains(By locator, int time){
 
     }
+
+    public void waitUntilElementIsPresent(By locator, int time){
+        try{
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.presenceOfElementLocated(locator));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
