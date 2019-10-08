@@ -49,8 +49,8 @@ public class TestBase {
         driver.findElement(By.id("passwordinput")).sendKeys(passw);
         WebElement signInButton = driver.findElement(By.id("signinrequest"));
         signInButton.click();
-        waitUntilElementIsClickable(By.id("profile"), 30);
-
+        //waitUntilElementIsClickable(By.id("profile"), 30);
+        waitUntilElementIsPresent(By.id("ihome"), 30);
     }
 
     public void openElementById(String id){

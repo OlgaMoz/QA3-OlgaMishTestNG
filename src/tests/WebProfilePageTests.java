@@ -13,6 +13,7 @@ public class WebProfilePageTests extends TestBase{
     @BeforeMethod
     public void startWorkProfilePage() throws InterruptedException {
         initLoginTests(LOGIN, PASSWORD);
+        waitUntilElementIsClickable(By.id("profile"), 30);
         openElementById("profile");
         waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 50);
     }
@@ -89,7 +90,7 @@ public class WebProfilePageTests extends TestBase{
 
         //---------------Go to the Family Page -----------------
         //openElementById("family", 3000);
-        waitUntilElementIsClickable(By.id("family"), 30);
+        waitUntilElementIsClickable(By.id("family"), 60);
         openElementById("family");
       //  Thread.sleep(5000);
        // waitUntilElementIsClickable(By.id("idnameuserinfamily"), 70);
