@@ -88,7 +88,7 @@ public class WebHomePageTests extends TestBase{
         //------------------------------------------------------------------------------------------------------
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void singleFilterFood() {
         waitUntilElementIsVisible(By.xpath("//select[@name='selectfood']"), 30);
         waitUntilAllElementsVisible(driver.findElements(By.xpath("//select[@name='selectfood']/option")), 30);
@@ -98,11 +98,11 @@ public class WebHomePageTests extends TestBase{
         System.out.println("is enabled: " + driver
                 .findElement(By.xpath("//div[@id='idbtnclearfilter']")).isEnabled());
         // --- get select-element (filter by food)
-        WebElement holidaysFilter = driver
+        WebElement foodFilter = driver
                 .findElement(By.name("selectfood"));
         // ------ choose filter "Kosher" ------
         waitUntilElementIsClickable(By.name("selectfood"), 90);
-        Select selector = new Select(holidaysFilter);
+        Select selector = new Select(foodFilter);
         waitUntilElementIsClickable(By.name("selectfood"), 100);
         waitUntilAllElementsVisible(driver
                 .findElements(By.xpath("//select[@name = 'selectfood']/option")),90);
@@ -117,18 +117,62 @@ public class WebHomePageTests extends TestBase{
                 .xpath("//div[@class = 'itemEventInsert']")),40);
 
         // ------ get all holidays values for all chosen by filter "Kosher"-food
-        //-------------ДОДЕЛАТЬ!-------------------------
         //------------------------------------------------------------------------------------------------------
-        /*List<WebElement> listHolidaysByChosenFood = driver.findElements(By.className("itemEvent"));
+        List<WebElement> listHolidaysByChosenFood = driver.findElements(By.className("itemEvent"));
+        List<WebElement> listPreferenceItemEvents =
+                driver.findElements(By.xpath("//div[@class='preferenceItemEvents']//span"));
 
-        // --- verify that all holidays values are "Shabbat" ----
+        // ---- verify that all food values are "Kosher" ----
         int counter = 0;
-        for (int i=0; i < listHolidaysByChosenFood.size(); i++){
-            //if (listHolidaysByChosenFood.get(i).getText().equals("Shabbat")) counter++;
-            if (listHolidaysByChosenFood.get(i).findElement(By.xpath("")).getText().equals("Shabbat")) counter++;
+        for (int i=1; i < listPreferenceItemEvents.size(); i=i+3){
+            System.out.println("Food: " + listPreferenceItemEvents.get(i).getText());
+            if (listPreferenceItemEvents.get(i).getText().contains("Kosher")) counter++;
         }
-        Assert.assertEquals(counter, listHolidaysByChosenFood.size());*/
+        Assert.assertEquals(counter, listHolidaysByChosenFood.size());
         //------------------------------------------------------------------------------------------------------
+    }
+
+    @Test(enabled = true)
+    public void singleFilterLanguage() {
+        waitUntilElementIsVisible(By.xpath("//select[@name='selectlangues']"), 30);
+        waitUntilAllElementsVisible(driver.findElements(By.xpath("//select[@name='selectlangues']/option")), 30);
+        // --- verify states "clear" button ----
+        System.out.println("is displayed: " + driver
+                .findElement(By.xpath("//div[@id='idbtnclearfilter']")).isDisplayed());
+        System.out.println("is enabled: " + driver
+                .findElement(By.xpath("//div[@id='idbtnclearfilter']")).isEnabled());
+        // --- get select-element (filter by language)
+        WebElement languageFilter = driver
+                .findElement(By.name("selectlangues"));
+        // ------ choose filter "English" ------
+        waitUntilElementIsClickable(By.name("selectlangues"), 90);
+        Select selector = new Select(languageFilter);
+        waitUntilElementIsClickable(By.name("selectlangues"), 100);
+        waitUntilAllElementsVisible(driver
+                .findElements(By.xpath("//select[@name = 'selectlangues']/option")),90);
+        selector.selectByValue("English");
+
+        // ------ wait that filter "English" is chosen -----
+        waitUntilElementIsClickable(By
+                .xpath("//div[@id='idbtnclearfilter']"),20);
+        waitUntilElementIsPresent(By
+                .xpath("//option[@selected][@value = 'English']"),20);
+        // ------ wait that all events by fiter "English" are loaded ----
+        waitUntilAllElementsVisible(driver.findElements(By
+                .xpath("//div[@class = 'itemEventInsert']")),40);
+        // ------ get all holidays values for all chosen by filter "Kosher"-food
+        //------------------------------------------------------------------------------------------------------
+        List<WebElement> listHolidaysByChosenLanguage = driver.findElements(By.xpath("//i[@class='fa fa-globe']/.."));
+
+        // ---- verify that all Language values are "English" ----
+        int counter = 0;
+        for (int i=0; i < listHolidaysByChosenLanguage.size(); i++){
+            System.out.println("Language: " + listHolidaysByChosenLanguage.get(i).getText());
+            if (listHolidaysByChosenLanguage.get(i).getText().contains("English")) counter++;
+        }
+        Assert.assertEquals(counter, listHolidaysByChosenLanguage.size());
+        //------------------------------------------------------------------------------------------------------
+
     }
 
 }
