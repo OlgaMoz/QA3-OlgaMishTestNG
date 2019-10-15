@@ -7,8 +7,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-public class WebProfilePageTests extends TestBase{
+import pages.PageBase;
+/*
+public class ProfilePageTests extends TestBase{
+    PageBase pageBase;
 
     @BeforeMethod
     public void startWorkProfilePage() throws InterruptedException {
@@ -17,17 +19,12 @@ public class WebProfilePageTests extends TestBase{
         openElementById("profile");
         waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 50);
     }
-
-    @Test
+*/
+  /*  @Test
     public void lastNameOfFamilyChanging() throws InterruptedException {
-
         //----------------New last name---------------------
-       // Thread.sleep(5000);
-      // waitUntilElementIsVisible(By.id("fieldobjfamilyName"), 50);
-       waitUntilElementIsClickable(By.id("fieldobjfamilyName"), 50);
+        waitUntilElementIsClickable(By.id("fieldobjfamilyName"), 50);
 
-       // new WebDriverWait(driver, 40).until(ExpectedConditions.presenceOfElementLocated(By.id("fieldobjfamilyName")));
-       // new WebDriverWait(driver, 40).until(ExpectedConditions.presenceOfElementLocated(By.id("fieldobjfamilyName")));
         String profileFamilyName =driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']")).getText();
         System.out.println("profileFamilyName: " + profileFamilyName);
         String lastName;
@@ -39,34 +36,28 @@ public class WebProfilePageTests extends TestBase{
         waitUntilElementIsVisible(By.id("helpselectinfoinprofile"), 50);
 
         WebElement lastNameField = driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']//input"));
-      /*  new WebDriverWait(driver, 40).
-                until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@id='fieldobjfamilyName']//input")));*/
-       waitUntilElementIsPresent(By
+        waitUntilElementIsPresent(By
                 .xpath("//span[@id='fieldobjfamilyName']//input"),20);
         lastNameField.click();
-       // Thread.sleep(5000);
+
         lastNameField.clear();
         lastNameField.sendKeys(lastName);
-       // Thread.sleep(5000);
 
         //-----------------Save profile---------------------
         waitUntilElementIsClickable(By.xpath("//div[@id='idbtnsaveprofile']"), 40);
         driver.findElement(By.xpath("//div[@id='idbtnsaveprofile']")).click();
         waitUntilElementIsVisible(By.id("idbtneditprofile"), 30);
-      //  Thread.sleep(5000);
+
         waitUntilElementIsVisible(By.xpath("//span[@id='fieldobjfamilyName']"), 50);
         profileFamilyName =driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']")).getText();
         System.out.println("Family Name in the profile: " + profileFamilyName);
 
         Assert.assertEquals(profileFamilyName,lastName, "Last name not preserved.");
-    }
+    }*/
+  /*
     @Test
-    public void webProfileAndFamilyPageComparing() throws InterruptedException {
-       /* initLoginTests(LOGIN,PASSWORD);
-        //---------------Go to the Profile Page -----------------
-        openElementById("profile");*/
+    public void profileAndFamilyPageComparing() throws InterruptedException {
         waitUntilElementIsVisible(By.xpath("//span[@id='fieldobjconfession']"), 30);
-       // Thread.sleep(5000);
         //---------------Save data from the Profile page-------------
         String profileConfession = driver.findElement(By.xpath("//span[@id='fieldobjconfession']")).getText();
         System.out.println("Profile confession: " + profileConfession);
@@ -86,14 +77,10 @@ public class WebProfilePageTests extends TestBase{
         String profileFamilyDescription = driver.findElement(By.xpath
                 ("//div[@class= 'itemprofilearea']/span[@id='fieldobjfamilyDescription']")).getText();
         System.out.println("Profile family description: " + profileFamilyDescription);
-        //Thread.sleep(10000);
 
         //---------------Go to the Family Page -----------------
-        //openElementById("family", 3000);
         waitUntilElementIsClickable(By.id("family"), 60);
         openElementById("family");
-      //  Thread.sleep(5000);
-       // waitUntilElementIsClickable(By.id("idnameuserinfamily"), 70);
         //----------------------Comparing--------------------------
         waitUntilElementIsVisible(By.cssSelector(".itemprofilefit #fieldobjconfession"), 40);
         String familyConfession = driver.findElement(
@@ -141,3 +128,4 @@ public class WebProfilePageTests extends TestBase{
     }
 
 }
+*/

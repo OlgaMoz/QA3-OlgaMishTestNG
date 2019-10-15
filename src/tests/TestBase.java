@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.PageBase;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -17,11 +18,12 @@ public class TestBase {
     public static final String LOGIN = "olga_mo_";
     public static final String PASSWORD = "Anna2019";
     WebDriver driver;
+    PageBase pageBase = new PageBase(driver);
 
     @BeforeMethod
     public void driverInit() {
         driver = new ChromeDriver();
-       // driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         driver.get("https://mishpahug.co.il/");
        // Thread.sleep(3000);
         waitUntilElementIsClickable(By.id("closedIntro"), 30);
@@ -40,10 +42,9 @@ public class TestBase {
         loginIcon.click();
 
         waitUntilElementIsVisible(By.id("signinrequest"), 30);
-
     }
 
-    public void initLoginTests(String login, String passw) {
+  /*  public void initLoginTests(String login, String passw) {
 
         initLoginTestsStart();
         driver.findElement(By.id("logininput")).sendKeys(login);
@@ -52,13 +53,12 @@ public class TestBase {
         signInButton.click();
         //waitUntilElementIsClickable(By.id("profile"), 30);
         waitUntilElementIsPresent(By.id("ihome"), 30);
-    }
+    }*/
 
     public void openElementById(String id){
         driver.findElement(By.id(id)).click();
               // Thread.sleep(i);
     }
-
     public void waitUntilElementIsVisible(By locator, int time){
         try{
             new WebDriverWait(driver, time)
@@ -85,6 +85,7 @@ public class TestBase {
             e.printStackTrace();
         }
     }
+
     public void waitUntilElementContains(By locator, int time){
 
     }
@@ -97,4 +98,5 @@ public class TestBase {
             e.printStackTrace();
         }
     }
+
 }
