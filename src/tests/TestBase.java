@@ -55,10 +55,10 @@ public class TestBase {
         waitUntilElementIsPresent(By.id("ihome"), 30);
     }*/
 
-    public void openElementById(String id){
+ /*   public void openElementById(String id){
         driver.findElement(By.id(id)).click();
               // Thread.sleep(i);
-    }
+    }*/
     public void waitUntilElementIsVisible(By locator, int time){
         try{
             new WebDriverWait(driver, time)
