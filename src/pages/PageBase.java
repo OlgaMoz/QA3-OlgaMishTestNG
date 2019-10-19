@@ -17,6 +17,10 @@ public class PageBase {
         this.driver = driver;
     }
 
+    public void tearDown() {
+        driver.quit();
+    }
+
     public void waitUntilElementIsVisible(By locator, int time){
         try{
             new WebDriverWait(driver, time)
@@ -42,10 +46,6 @@ public class PageBase {
         } catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    public void waitUntilElementContains(By locator, int time){
-
     }
 
     public void waitUntilElementIsPresent(By locator, int time){

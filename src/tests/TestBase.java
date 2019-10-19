@@ -37,12 +37,32 @@ public class TestBase {
         driver.quit();
     }
 
+    public void waitUntilElementIsVisible(By locator, int time){
+        try{
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.visibilityOfElementLocated(locator));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void waitUntilElementIsClickable(By locator, int time) {
+        try {
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.elementToBeClickable(locator));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+/*
     public void initLoginTestsStart(){
         WebElement loginIcon = driver.findElement(By.id("idsignin"));
         loginIcon.click();
 
-        waitUntilElementIsVisible(By.id("signinrequest"), 30);
+        pageBase.waitUntilElementIsVisible(By.id("signinrequest"), 30);
     }
+    */
 
   /*  public void initLoginTests(String login, String passw) {
 
@@ -59,15 +79,8 @@ public class TestBase {
         driver.findElement(By.id(id)).click();
               // Thread.sleep(i);
     }*/
-    public void waitUntilElementIsVisible(By locator, int time){
-        try{
-            new WebDriverWait(driver, time)
-                    .until(ExpectedConditions.visibilityOfElementLocated(locator));
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 
+/*
     public void waitUntilAllElementsVisible(List<WebElement> listOptions, int time){
         try{
             new WebDriverWait(driver, time)
@@ -76,16 +89,9 @@ public class TestBase {
             e.printStackTrace();
         }
     }
+*/
 
-    public void waitUntilElementIsClickable(By locator, int time){
-        try{
-            new WebDriverWait(driver, time)
-                    .until(ExpectedConditions.elementToBeClickable(locator));
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
+/*
     public void waitUntilElementContains(By locator, int time){
 
     }
@@ -98,5 +104,6 @@ public class TestBase {
             e.printStackTrace();
         }
     }
+*/
 
 }
