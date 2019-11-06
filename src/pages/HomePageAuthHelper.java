@@ -9,14 +9,6 @@ public class HomePageAuthHelper extends PageBase {
         super(driver);
     }
 
-   /* public void waitUntilPageIsLoaded(){
-        waitUntilElementIsClickable(By.id("profile"),30);
-    }*/
-
-   /* public Boolean correctPageIsLoaded(){
-        WebElement profileIcon = driver.findElement(By.id("profile"));
-        return profileIcon.getAttribute("title").contains(LOGIN);
-    }*/
     public Boolean correctAuthorizationIsEnded(){
         WebElement profileIcon = driver.findElement(By.id("profile"));
         return profileIcon.getAttribute("title").contains(LOGIN);

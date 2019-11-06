@@ -1,12 +1,7 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
 
@@ -29,7 +24,8 @@ public class ProfilePageTests extends TestBase {
         homePage.waitUntilHomePageIsLoaded();
         loginPage.openLoginPage();
         loginPage.initLoginTests(LOGIN, PASSWORD);
-        profilePage.openProfile();
+        profilePage.openProfilePage();
+        driver.manage().window().maximize();
     }
 
     @Test
@@ -39,46 +35,19 @@ public class ProfilePageTests extends TestBase {
         //-------------- Open in edit mode and change the last name --------------------
         profilePage.changeLastName(lastName);
 
-        //-----------------Save profile---last name???????------------------
+        //-----------------Save profile---------------------
         Assert.assertEquals(profilePage.saveProfile(), lastName, "Last name not preserved.");
     }
 
     @Test
     public void profileAndFamilyPageComparing() {
-        String [] profilelDetails ;/*= new String[6];*/
-        String [] familyDetails;/* = new String[6];*/
+        String[] profilelDetails;/*= new String[6];*/
+        String[] familyDetails;/* = new String[6];*/
         profilelDetails = profilePage.saveDataFromTheProfilePage();
-        familyDetails = saveDataFromTheFamilyPage();
-
-
-       // Assert.assertTrue(profilePage.comparingProfileAndFamilyPage(profilePage.saveDataFromTheProfilePage(),
-        //        profilePage.saveDataFromTheFamilyPage()));
-      /*  Assert.assertTrue(profilePage.comparingProfileAndFamilyPage(saveDataFromTheProfilePage(),
-                saveDataFromTheFamilyPage()));*/
+        familyPage.openFamilyProfilePage();
+        familyDetails = familyPage.saveDataFromTheFamilyPage();
+        Boolean resultComparingPages;
+        resultComparingPages = profilePage.comparingProfileAndFamilyPage(profilelDetails, familyDetails);
+        Assert.assertTrue(resultComparingPages);
     }
-
-   /* public String[] saveDataFromTheProfilePage() {
-        waitUntilElementIsVisible(By.cssSelector(".itemprofilefit #fieldobjconfession"), 40);
-        String[] array;
-        //  array1 = new String[6];
-        Boolean familySign;
-        familySign = true;
-        array = profilePage.saveDataFromTheProfileOrFamilyPage(familySign);
-        return array;
-    }*/
-
-    public String[] saveDataFromTheFamilyPage() {
-        familyPage.waitUntilFamilyPageIsExist();
-       // waitUntilElementIsClickable(By.id("family"), 60);
-        profilePage.openElementById("family");
-        waitUntilElementIsVisible(By.id("fieldobjconfession"), 40);
-        String[] array;
-        //  array1 = new String[6];
-        Boolean familySign;
-        familySign = false;
-        array = profilePage.saveDataFromTheProfileOrFamilyPage(familySign);
-        return array;
-    }
-
-
 }

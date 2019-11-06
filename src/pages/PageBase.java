@@ -84,19 +84,6 @@ public class PageBase {
         return allHolidaysChosenByFilter;
     }
 
- /*   public void getAllHolidaysValuesForAllEventsChosenByFilter(By locator, String name) {
-
-        List<WebElement> listHolidays = driver.findElements(locator);
-
-        // --- verify that all holidays values are "name" ----
-        int counter = 0;
-        for (int i=0; i < listHolidays.size(); i++){
-            System.out.println("Filter: " + listHolidays.get(i).getText());
-            if (listHolidays.get(i).getText().contains(name)) counter++;
-        }
-        Assert.assertEquals(counter, listHolidays.size());
-    }*/
-
     public void waitThatFilterAndAllOptionsAreLoaded(By locator1, By locator2) throws InterruptedException {
 
         Thread.sleep(5000);
@@ -140,5 +127,43 @@ public class PageBase {
       /*  Select selector = new Select(holidaysFilter);*/
         waitThatFilterAndAllOptionsAreLoaded(locator1, locator2);
        /* selector.selectByValue(name);*/
+    }
+
+    public void openElementById(String id){
+        waitUntilElementIsClickable(By.id(id), 30);
+        driver.findElement(By.id(id)).click();
+        // Thread.sleep(i);
+    }
+
+    public String[] saveDataFromTheProfileOrFamilyPage(Boolean sign) {
+
+        String [] profileData;
+        profileData = new String[6];
+        //---------------Save data from the Profile page-------------
+        //profileConfession
+        profileData[0] = driver.findElement(By.id("fieldobjconfession")).getText();
+
+        //profileLanguage
+        profileData[1] = driver.findElement(By.id("fieldobjlanguages")).getText();
+
+        //profileFoodPreference
+        profileData[2] = driver.findElement(By.id("fieldobjfoodPreferences")).getText();
+
+        //profileEmail
+        profileData[3] = driver.findElement(By.id("fieldobjelMail")).getText();
+
+        if (sign) {
+            //profileFamilyName
+            profileData[4] = driver.findElement(By.id("fieldobjfamilyName")).getText();
+        }
+        else {
+            //profileName
+            profileData[4]  = driver.findElement(By.id("titleprofile")).getText();
+        }
+
+        //profileFamilyDescription
+        profileData[5] = driver.findElement(By.id("fieldobjfamilyDescription")).getText();
+
+        return profileData;
     }
 }

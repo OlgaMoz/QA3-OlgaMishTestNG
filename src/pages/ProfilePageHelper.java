@@ -10,7 +10,7 @@ public class ProfilePageHelper extends PageBase {
         super(driver);
     }
 
-    public void openProfile() {
+    public void openProfilePage() {
         waitUntilElementIsClickable(By.id("profile"), 30);
         openElementById("profile");
         waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 50);
@@ -38,7 +38,7 @@ public class ProfilePageHelper extends PageBase {
         return profileFamilyName;
     }
 
-    public void changeLastName(String lastName) {
+    public void changeLastName(String lastName) throws InterruptedException {
         openElementById("idbtneditprofile");
         waitUntilElementIsVisible(By.id("helpselectinfoinprofile"), 50);
 
@@ -49,6 +49,7 @@ public class ProfilePageHelper extends PageBase {
 
         lastNameField.clear();
         lastNameField.sendKeys(lastName);
+        Thread.sleep(7000);
     }
     public String newLastNameGeneration() {
         waitUntilElementIsClickable(By.id("fieldobjfamilyName"), 50);
@@ -61,11 +62,7 @@ public class ProfilePageHelper extends PageBase {
         System.out.println("lastName new: " + lastName);
         return lastName;
     }
-    public void openElementById(String id){
-        waitUntilElementIsClickable(By.id(id), 30);
-        driver.findElement(By.id(id)).click();
-        // Thread.sleep(i);
-    }
+
     public Boolean comparingProfileAndFamilyPage(String[] arrayProfile, String[] arrayFamily) {
         System.out.println("Profile confession: " + arrayProfile[0]);
         System.out.println("Family confession: " + arrayFamily[0]);
@@ -104,58 +101,5 @@ public class ProfilePageHelper extends PageBase {
                 + signOfTruth);
 
         return signOfTruth;
-    }
-
-  /*  public String[] saveDataFromTheFamilyPage() {
-        waitUntilElementIsClickable(By.id("family"), 60);
-        openElementById("family");
-        waitUntilElementIsVisible(By.id("fieldobjconfession"), 40);
-        String[] array;
-        //  array1 = new String[6];
-        Boolean familySign;
-        familySign = false;
-        array = saveDataFromTheProfileOrFamilyPage(familySign);
-        return array;
-    }
-    public String[] saveDataFromTheProfilePage() {
-        waitUntilElementIsVisible(By.cssSelector(".itemprofilefit #fieldobjconfession"), 40);
-        String[] array;
-        //  array1 = new String[6];
-        Boolean familySign;
-        familySign = true;
-        array = saveDataFromTheProfileOrFamilyPage(familySign);
-        return array;
-    }*/
-
-    public String[] saveDataFromTheProfileOrFamilyPage(Boolean sign) {
-
-        String [] profileData;
-        profileData = new String[6];
-        //---------------Save data from the Profile page-------------
-        //profileConfession
-        profileData[0] = driver.findElement(By.id("fieldobjconfession")).getText();
-
-        //profileLanguage
-        profileData[1] = driver.findElement(By.id("fieldobjlanguages")).getText();
-
-        //profileFoodPreference
-        profileData[2] = driver.findElement(By.id("fieldobjfoodPreferences")).getText();
-
-        //profileEmail
-        profileData[3] = driver.findElement(By.id("fieldobjelMail")).getText();
-
-        if (sign) {
-            //profileFamilyName
-            profileData[4] = driver.findElement(By.id("fieldobjfamilyName")).getText();
-        }
-        else {
-            //profileName
-            profileData[4]  = driver.findElement(By.id("titleprofile")).getText();
-        }
-
-        //profileFamilyDescription
-        profileData[5] = driver.findElement(By.id("fieldobjfamilyDescription")).getText();
-
-        return profileData;
     }
 }
