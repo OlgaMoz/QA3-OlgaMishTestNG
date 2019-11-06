@@ -19,17 +19,16 @@ public class LoginPageTests extends TestBase {
         loginPage = new LoginPageHelper(driver);
         homePageAuth = new HomePageAuthHelper(driver);
 
-        homePage.waitUntilPageIsLoaded(By.id("idsignin"),20);
+        homePage.waitUntilHomePageIsLoaded();
         loginPage.openLoginPage();
-        loginPage.waitUntilPageIsLoaded(By.id("signinrequest"), 20);
-
+        loginPage.waitUntilLoginPageIsLoaded();
     }
 
     @Test
     public void loginPositiveTest() {
 
         loginPage.initLoginTests(LOGIN, PASSWORD);
-        loginPage.waitUntilPageIsLoaded(By.id("profile"), 30);
+        homePageAuth.waitUntilHomePageAuthIsLoaded();
         Assert.assertTrue(homePageAuth.correctAuthorizationIsEnded());
 
     }
@@ -39,15 +38,15 @@ public class LoginPageTests extends TestBase {
         loginPage.initLoginTests(LOGIN, LOGIN);
         Assert.assertTrue(loginPage.loginToTheSystemIncorrect());
         loginPage.closeLoginWindowByX();
-        Assert.assertTrue(homePage.correctPageIsLoaded(By.id("idtitletypesearchevents"), "List events"));
+        Assert.assertTrue(homePage.correctHomePageIsLoaded());
     }
 
 
     @Test
     public void loginExitByCancelTest() {
-        loginPage.waitUntilPageIsLoaded(By.id("signinrequest"), 30);
+        loginPage.waitUntilLoginPageIsLoaded();
         loginPage.closeLoginWindowByX();
-        Assert.assertTrue(homePage.correctPageIsLoaded(By.id("idtitletypesearchevents"), "List events"));
+        Assert.assertTrue(homePage.correctHomePageIsLoaded()&homePage.userIsNotLoggedIn());
     }
 
 }

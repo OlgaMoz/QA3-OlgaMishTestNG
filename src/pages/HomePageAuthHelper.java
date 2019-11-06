@@ -21,4 +21,8 @@ public class HomePageAuthHelper extends PageBase {
         WebElement profileIcon = driver.findElement(By.id("profile"));
         return profileIcon.getAttribute("title").contains(LOGIN);
     }
+
+    public void waitUntilHomePageAuthIsLoaded() {
+        waitUntilPageIsLoaded(By.id("profile"), 30);
+    }
 }

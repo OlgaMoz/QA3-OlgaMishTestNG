@@ -11,11 +11,12 @@ import org.testng.annotations.Test;
 import pages.*;
 
 public class ProfilePageTests extends TestBase {
-    PageBase pageBase;
+   // PageBase pageBase;
     HomePageHelper homePage;
     LoginPageHelper loginPage;
     HomePageAuthHelper homePageAuth;
     ProfilePageHelper profilePage;
+     FamilyPageHelper familyPage;
 
     @BeforeMethod
     public void initTests() {
@@ -23,10 +24,10 @@ public class ProfilePageTests extends TestBase {
         loginPage = new LoginPageHelper(driver);
         homePageAuth = new HomePageAuthHelper(driver);
         profilePage = new ProfilePageHelper(driver);
+        familyPage = new FamilyPageHelper(driver);
 
-        homePage.waitUntilPageIsLoaded(By.id("idsignin"), 20);
+        homePage.waitUntilHomePageIsLoaded();
         loginPage.openLoginPage();
-        //loginPage.waitUntilPageIsLoaded(By.id("signinrequest"), 20);
         loginPage.initLoginTests(LOGIN, PASSWORD);
         profilePage.openProfile();
     }
@@ -38,15 +39,45 @@ public class ProfilePageTests extends TestBase {
         //-------------- Open in edit mode and change the last name --------------------
         profilePage.changeLastName(lastName);
 
-        //-----------------Save profile---------------------
+        //-----------------Save profile---last name???????------------------
         Assert.assertEquals(profilePage.saveProfile(), lastName, "Last name not preserved.");
     }
 
     @Test
-    public void profileAndFamilyPageComparing() throws InterruptedException {
+    public void profileAndFamilyPageComparing() {
+        String [] profilelDetails ;/*= new String[6];*/
+        String [] familyDetails;/* = new String[6];*/
+        profilelDetails = profilePage.saveDataFromTheProfilePage();
+        familyDetails = saveDataFromTheFamilyPage();
 
-        Assert.assertTrue(profilePage.comparingProfileAndFamilyPage(profilePage.saveDataFromTheProfilePage(),
-                profilePage.saveDataFromTheFamilyPage()));
+
+       // Assert.assertTrue(profilePage.comparingProfileAndFamilyPage(profilePage.saveDataFromTheProfilePage(),
+        //        profilePage.saveDataFromTheFamilyPage()));
+      /*  Assert.assertTrue(profilePage.comparingProfileAndFamilyPage(saveDataFromTheProfilePage(),
+                saveDataFromTheFamilyPage()));*/
+    }
+
+   /* public String[] saveDataFromTheProfilePage() {
+        waitUntilElementIsVisible(By.cssSelector(".itemprofilefit #fieldobjconfession"), 40);
+        String[] array;
+        //  array1 = new String[6];
+        Boolean familySign;
+        familySign = true;
+        array = profilePage.saveDataFromTheProfileOrFamilyPage(familySign);
+        return array;
+    }*/
+
+    public String[] saveDataFromTheFamilyPage() {
+        familyPage.waitUntilFamilyPageIsExist();
+       // waitUntilElementIsClickable(By.id("family"), 60);
+        profilePage.openElementById("family");
+        waitUntilElementIsVisible(By.id("fieldobjconfession"), 40);
+        String[] array;
+        //  array1 = new String[6];
+        Boolean familySign;
+        familySign = false;
+        array = profilePage.saveDataFromTheProfileOrFamilyPage(familySign);
+        return array;
     }
 
 

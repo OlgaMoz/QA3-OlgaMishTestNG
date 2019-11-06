@@ -16,6 +16,10 @@ public class LoginPageHelper extends PageBase {
         waitUntilElementIsVisible(By.id("signinrequest"), 30);
     }
 
+    public void waitUntilLoginPageIsLoaded() {
+        waitUntilPageIsLoaded(By.id("signinrequest"), 20);
+    }
+
     public Boolean correctPageIsLoaded() {
         return driver
                 .findElement(By.id("clickreg")).getText().contains("registration");

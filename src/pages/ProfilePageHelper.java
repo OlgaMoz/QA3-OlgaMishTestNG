@@ -9,11 +9,23 @@ public class ProfilePageHelper extends PageBase {
     public ProfilePageHelper(WebDriver driver) {
         super(driver);
     }
+
     public void openProfile() {
         waitUntilElementIsClickable(By.id("profile"), 30);
         openElementById("profile");
         waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 50);
     }
+
+    public String[] saveDataFromTheProfilePage() {
+        waitUntilElementIsVisible(By.cssSelector(".itemprofilefit #fieldobjconfession"), 40);
+        String[] array;
+        //  array1 = new String[6];
+        Boolean familySign;
+        familySign = true;
+        array = saveDataFromTheProfileOrFamilyPage(familySign);
+        return array;
+    }
+
     public String saveProfile() {
         String profileFamilyName;
         waitUntilElementIsClickable(By.xpath("//div[@id='idbtnsaveprofile']"), 40);
@@ -94,7 +106,7 @@ public class ProfilePageHelper extends PageBase {
         return signOfTruth;
     }
 
-    public String[] saveDataFromTheFamilyPage() {
+  /*  public String[] saveDataFromTheFamilyPage() {
         waitUntilElementIsClickable(By.id("family"), 60);
         openElementById("family");
         waitUntilElementIsVisible(By.id("fieldobjconfession"), 40);
@@ -113,7 +125,7 @@ public class ProfilePageHelper extends PageBase {
         familySign = true;
         array = saveDataFromTheProfileOrFamilyPage(familySign);
         return array;
-    }
+    }*/
 
     public String[] saveDataFromTheProfileOrFamilyPage(Boolean sign) {
 
@@ -137,7 +149,7 @@ public class ProfilePageHelper extends PageBase {
             profileData[4] = driver.findElement(By.id("fieldobjfamilyName")).getText();
         }
         else {
-            //profileFamilyName
+            //profileName
             profileData[4]  = driver.findElement(By.id("titleprofile")).getText();
         }
 
