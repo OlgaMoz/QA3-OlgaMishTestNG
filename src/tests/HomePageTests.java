@@ -1,10 +1,12 @@
 package tests;
 
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePageAuthHelper;
 import pages.HomePageHelper;
+import pages.LoginPageHelper;
 
 public class HomePageTests extends TestBase{
     HomePageHelper homePage;
@@ -14,7 +16,13 @@ public class HomePageTests extends TestBase{
     public void initTests() {
         homePage = new HomePageHelper(driver);
         homePageAuth = new HomePageAuthHelper(driver);
+
+        homePageAuth = PageFactory.initElements(driver, HomePageAuthHelper.class);
+        homePage = PageFactory.initElements(driver, HomePageHelper.class);
+
         homePage.waitUntilHomePageIsLoaded();
+
+
     }
 
     @Test

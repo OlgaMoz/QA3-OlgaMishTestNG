@@ -1,12 +1,14 @@
 package tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePageAuthHelper;
 import pages.HomePageHelper;
 import pages.LoginPageHelper;
+import pages.ProfilePageHelper;
 
 public class LoginPageTests extends TestBase {
     HomePageHelper homePage;
@@ -18,6 +20,10 @@ public class LoginPageTests extends TestBase {
         homePage = new HomePageHelper(driver);
         loginPage = new LoginPageHelper(driver);
         homePageAuth = new HomePageAuthHelper(driver);
+
+        loginPage = PageFactory.initElements(driver, LoginPageHelper.class);
+        homePageAuth = PageFactory.initElements(driver, HomePageAuthHelper.class);
+        homePage = PageFactory.initElements(driver, HomePageHelper.class);
 
         homePage.waitUntilHomePageIsLoaded();
         loginPage.openLoginPage();
@@ -46,7 +52,7 @@ public class LoginPageTests extends TestBase {
     public void loginExitByCancelTest() {
         loginPage.waitUntilLoginPageIsLoaded();
         loginPage.closeLoginWindowByX();
-        Assert.assertTrue(homePage.correctHomePageIsLoaded()&homePage.userIsNotLoggedIn());
+       Assert.assertTrue(homePage.correctHomePageIsLoaded()&homePage.userIsNotLoggedIn());
     }
 
 }

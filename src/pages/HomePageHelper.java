@@ -3,91 +3,127 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
 public class HomePageHelper extends PageBase {
+
+    @FindBy(id = "idsignin")
+    WebElement loginIcon;
+
+    @FindBy(xpath = "//div[@class = 'itemEventInsert']")
+    List<WebElement> eventsList;
+
+    @FindBy(id = "idtitletypesearchevents")
+    WebElement listEvent;
+
+    @FindBy(name = "selectholidays")
+    WebElement filterHolidays;
+
+    @FindBy(name = "selectfood")
+    WebElement filterFood;
+
+    @FindBy(name = "selectlangues")
+    WebElement filterLanguages;
+
+    @FindBy (id = "idbtnclearfilter")
+    WebElement clearFilterButton;
+
+    @FindBy (css  = ".holidayItemEvents")
+    List<WebElement> listHolidaysHoliday;
+
+    @FindBy (xpath = "//i[@class='fa fa-cutlery']/..")
+    List<WebElement> listHolidaysFood;
+
+    @FindBy (xpath = "//i[@class='fa fa-globe']/..")
+    List<WebElement> listHolidaysLanguage;
+
+    @FindBy (xpath = "//select[@name = 'selectholidays']/option")
+    List<WebElement> optionsHolidays;
+
+    @FindBy (xpath = "//select[@name='selectfood']/option")
+    List<WebElement> optionsFood;
+
+    @FindBy (xpath = "//select[@name='selectlangues']/option")
+    List<WebElement> optionsLanguage;
+
+    @FindBy(xpath = "//option[@selected][@value = 'Shabbat']")
+    WebElement chosenFilterHolidays;
+
+    @FindBy(xpath = "//option[@selected][@value = 'Kosher']")
+    WebElement chosenFilterFood;
+
+    @FindBy(xpath = "//option[@selected][@value = 'English']")
+    WebElement chosenFilterLanguage;
 
     public HomePageHelper(WebDriver driver) {
         super(driver);
     }
 
     public void waitUntilHomePageIsLoaded(){
-        waitUntilPageIsLoaded(By.id("idsignin"),20);
+        waitUntilPageIsLoaded(loginIcon,20);
     }
 
     public Boolean correctHomePageIsLoaded(){
-        return correctPageIsLoaded(By.id("idtitletypesearchevents"), "List events");
+        return correctPageIsLoaded(listEvent, "List events");
     }
 
     public Boolean userIsNotLoggedIn(){
-        return correctPageIsLoaded(By.id("idsignin"), "Login");
+        return correctPageIsLoaded(loginIcon, "Login");
     }
 
     public boolean getAllHolidaysValuesForAllEventsChosenByFilterShabbat(){
-        return getAllHolidaysValuesForAllEventsChosenByFilter(By.cssSelector(".holidayItemEvents"), "Shabbat");
+        return getAllHolidaysValuesForAllEventsChosenByFilter(listHolidaysHoliday, "Shabbat");
     }
 
     public boolean getAllHolidaysValuesForAllEventsChosenByFilterKosher() {
-        return getAllHolidaysValuesForAllEventsChosenByFilter(By.xpath("//i[@class='fa fa-cutlery']/.."),
-                "Kosher");
+        return getAllHolidaysValuesForAllEventsChosenByFilter(listHolidaysFood,"Kosher");
     }
 
     public boolean getAllHolidaysValuesForAllEventsChosenByFilterEnglish() {
-       return getAllHolidaysValuesForAllEventsChosenByFilter(By.xpath("//i[@class='fa fa-globe']/.."),"English");
+       return getAllHolidaysValuesForAllEventsChosenByFilter(listHolidaysLanguage,"English");
     }
 
     public void waitThatFilterByHolidayAndAllOptionsAreLoaded() throws InterruptedException {
-        waitThatFilterAndAllOptionsAreLoaded(By.name("selectholidays"),
-                By.xpath("//select[@name = 'selectholidays']/option"));
+        waitThatFilterAndAllOptionsAreLoaded(filterHolidays, optionsHolidays);
     }
 
     public void waitThatFilterByFoodAndAllOptionsAreLoaded() throws InterruptedException {
-        waitThatFilterAndAllOptionsAreLoaded(By.name("selectfood"),
-                By.xpath("//select[@name='selectfood']/option"));
+        waitThatFilterAndAllOptionsAreLoaded(filterFood, optionsFood);
     }
 
     public void waitThatFilterByLanguageAndAllOptionsAreLoaded() throws InterruptedException {
-        waitThatFilterAndAllOptionsAreLoaded(By.name("selectlangues"),
-                By.xpath("//select[@name='selectlangues']/option"));
+        waitThatFilterAndAllOptionsAreLoaded(filterLanguages, optionsLanguage);
     }
 
     public void getSelectElementFilterByHoliday() throws InterruptedException {
-        getSelectElementFilterBy(By.name("selectholidays"), "Shabbat",
-                By.xpath("//select[@name = 'selectholidays']/option"));
+        getSelectElementFilterBy(filterHolidays, "Shabbat", optionsHolidays);
     }
 
     public void getSelectElementFilterByFood() throws InterruptedException {
-        getSelectElementFilterBy(By.name("selectfood"), "Kosher",
-                By.xpath("//select[@name = 'selectfood']/option"));
+        getSelectElementFilterBy(filterFood, "Kosher", optionsFood);
     }
 
     public void getSelectElementFilterByLanguage() throws InterruptedException {
-        getSelectElementFilterBy(By.name("selectlangues"), "English",
-                By.xpath("//select[@name = 'selectlangues']/option"));
+        getSelectElementFilterBy(filterLanguages, "English", optionsLanguage);
     }
 
     public void waitThatFilterHolidayIsChosenAndAllEventsByFilterAreLoaded() {
-        waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(By.xpath("//option[@selected][@value = 'Shabbat']"));
+        waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(chosenFilterHolidays);
     }
 
     public void waitThatFilterFoodIsChosenAndAllEventsByFilterAreLoaded() {
-        waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(By.xpath
-                ("//option[@selected][@value = 'Kosher']"));
+        waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(chosenFilterFood);
     }
 
     public void waitThatFilterLanguageIsChosenAndAllEventsByFilterAreLoaded() {
-        waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(
-                By.xpath("//option[@selected][@value = 'English']"));
+        waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(chosenFilterLanguage);
     }
 
     public void verifyTheStatusClearButton() {
 
-        System.out.println("is displayed: " + driver
-                .findElement(By.cssSelector("#idbtnclearfilter")).isDisplayed());
-        System.out.println("is enabled: " + driver
-                .findElement(By.cssSelector("#idbtnclearfilter")).isEnabled());
+        System.out.println("is displayed: " + clearFilterButton.isDisplayed());
+        System.out.println("is enabled: " + clearFilterButton.isEnabled());
     }
 }

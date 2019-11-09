@@ -3,44 +3,62 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class LoginPageHelper extends PageBase {
+
+    @FindBy(id = "signinrequest")
+    WebElement signInButton;
+
+    @FindBy(id = "idsignin")
+    WebElement loginIcon;
+
+  /*  @FindBy(id = "clickreg")
+    WebElement registrationLink;*/
+
+    @FindBy(id = "logininput")
+    WebElement loginField;
+
+    @FindBy(id = "passwordinput")
+    WebElement passwordField;
+
+   // @FindBy(id = "ihome")
+   // WebElement iconHomForAuthorizedUser;
+
+    @FindBy(id = "wrongloginorpassword")
+    WebElement wrongAuth;
+
+    @FindBy(id = "closedsignin")
+    WebElement closeByXButton;
 
     public LoginPageHelper(WebDriver driver) {
         super(driver);
     }
 
     public void openLoginPage() {
-        WebElement loginIcon = driver.findElement(By.id("idsignin"));
-        loginIcon.click();
-        waitUntilElementIsVisible(By.id("signinrequest"), 30);
+        openPage(loginIcon, signInButton);
     }
 
     public void waitUntilLoginPageIsLoaded() {
-        waitUntilPageIsLoaded(By.id("signinrequest"), 20);
+        waitUntilPageIsLoaded(signInButton, 20);
     }
 
-    public Boolean correctPageIsLoaded() {
-        return driver
-                .findElement(By.id("clickreg")).getText().contains("registration");
-    }
-
+  /*  public Boolean correctPageIsLoaded() {
+       return registrationLink.getText().contains("registration");
+    }*/
 
     public void initLoginTests(String login, String passw) {
-        driver.findElement(By.id("logininput")).sendKeys(login);
-        driver.findElement(By.id("passwordinput")).sendKeys(passw);
-        WebElement signInButton = driver.findElement(By.id("signinrequest"));
+        loginField.sendKeys(login);
+        passwordField.sendKeys(passw);
         signInButton.click();
-        waitUntilElementIsPresent(By.id("ihome"), 30);
     }
 
     public void closeLoginWindowByX() {
-        driver.findElement(By.id("closedsignin")).click();
+        closeByXButton.click();
     }
 
     public boolean loginToTheSystemIncorrect() {
-        waitUntilElementIsVisible(By.id("wrongloginorpassword"), 30);
-        String message = driver.findElement(By.id("wrongloginorpassword")).getText();
-        return message.contains("Wrong Authorization!");
+        waitUntilElementIsVisible(wrongAuth, 30);
+        return wrongAuth.getText().contains("Wrong Authorization!");
     }
 }

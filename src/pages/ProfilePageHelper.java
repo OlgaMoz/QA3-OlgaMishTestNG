@@ -3,57 +3,80 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ProfilePageHelper extends PageBase {
+    @FindBy(id = "profile")
+    WebElement profileButton;
+
+    @FindBy(id = "idfamilyinfoimg")
+    WebElement profilePhoto;
+
+    @FindBy(xpath = "//div[@id='idbtnsaveprofile']")
+    WebElement saveButton;
+
+    @FindBy(id = "idbtneditprofile")
+    WebElement editButton;
+
+    @FindBy(id = "fieldobjfamilyName")
+    WebElement fieldSavedLastName;
+
+    @FindBy(css = ".itemprofilefit #fieldobjconfession")
+    WebElement profileConfession;
+
+    @FindBy(id = "helpselectinfoinprofile")
+    WebElement helpSelectInfoInProfile;
+
+    @FindBy(xpath = "//span[@id='fieldobjfamilyName']//input")
+    WebElement fieldEditedLastName;
 
     public ProfilePageHelper(WebDriver driver) {
         super(driver);
     }
 
-    public void openProfile() {
-        waitUntilElementIsClickable(By.id("profile"), 30);
-        openElementById("profile");
-        waitUntilElementIsVisible(By.id("idfamilyinfoimg"), 50);
+    public void openProfilePage() {
+        openPage(profileButton, profilePhoto);
     }
 
     public String[] saveDataFromTheProfilePage() {
-        waitUntilElementIsVisible(By.cssSelector(".itemprofilefit #fieldobjconfession"), 40);
+        waitUntilElementIsVisible(profileConfession, 40);
         String[] array;
-        //  array1 = new String[6];
         Boolean familySign;
         familySign = true;
         array = saveDataFromTheProfileOrFamilyPage(familySign);
         return array;
     }
-
     public String saveProfile() {
+        scrollPageUp();
         String profileFamilyName;
-        waitUntilElementIsClickable(By.xpath("//div[@id='idbtnsaveprofile']"), 40);
-        driver.findElement(By.xpath("//div[@id='idbtnsaveprofile']")).click();
-        waitUntilElementIsVisible(By.id("idbtneditprofile"), 30);
+        waitUntilElementIsClickable(saveButton, 40);
+        saveButton.click();
+        waitUntilElementIsVisible(editButton, 30);
 
-        waitUntilElementIsVisible(By.xpath("//span[@id='fieldobjfamilyName']"), 50);
-        profileFamilyName =driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']")).getText();
+        scrollPageDown();
+        //----------------------------??????---------------------------------
+        waitUntilElementIsVisible(fieldSavedLastName, 50);
+        profileFamilyName =fieldSavedLastName.getText();
+        //----------------------------??????---------------------------------
         System.out.println("Family Name in the profile: " + profileFamilyName);
         return profileFamilyName;
     }
 
-    public void changeLastName(String lastName) {
-        openElementById("idbtneditprofile");
-        waitUntilElementIsVisible(By.id("helpselectinfoinprofile"), 50);
+    public void changeLastName(String lastName) throws InterruptedException {
 
-        WebElement lastNameField = driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']//input"));
-        waitUntilElementIsPresent(By
-                .xpath("//span[@id='fieldobjfamilyName']//input"),20);
-        lastNameField.click();
+        openElementByLocator(editButton);
+        waitUntilElementIsVisible(helpSelectInfoInProfile, 50);
+        waitUntilElementIsVisible(fieldEditedLastName,20);
+        fieldEditedLastName.click();
 
-        lastNameField.clear();
-        lastNameField.sendKeys(lastName);
+        fieldEditedLastName.clear();
+        fieldEditedLastName.sendKeys(lastName);
+        //Thread.sleep(7000);
     }
     public String newLastNameGeneration() {
-        waitUntilElementIsClickable(By.id("fieldobjfamilyName"), 50);
+        waitUntilElementIsClickable(fieldSavedLastName, 50);
 
-        String profileFamilyName =driver.findElement(By.xpath("//span[@id='fieldobjfamilyName']")).getText();
+        String profileFamilyName =fieldSavedLastName.getText();
         System.out.println("profileFamilyName: " + profileFamilyName);
         String lastName;
         lastName = "Shapiro";
@@ -61,11 +84,7 @@ public class ProfilePageHelper extends PageBase {
         System.out.println("lastName new: " + lastName);
         return lastName;
     }
-    public void openElementById(String id){
-        waitUntilElementIsClickable(By.id(id), 30);
-        driver.findElement(By.id(id)).click();
-        // Thread.sleep(i);
-    }
+
     public Boolean comparingProfileAndFamilyPage(String[] arrayProfile, String[] arrayFamily) {
         System.out.println("Profile confession: " + arrayProfile[0]);
         System.out.println("Family confession: " + arrayFamily[0]);
@@ -104,58 +123,5 @@ public class ProfilePageHelper extends PageBase {
                 + signOfTruth);
 
         return signOfTruth;
-    }
-
-  /*  public String[] saveDataFromTheFamilyPage() {
-        waitUntilElementIsClickable(By.id("family"), 60);
-        openElementById("family");
-        waitUntilElementIsVisible(By.id("fieldobjconfession"), 40);
-        String[] array;
-        //  array1 = new String[6];
-        Boolean familySign;
-        familySign = false;
-        array = saveDataFromTheProfileOrFamilyPage(familySign);
-        return array;
-    }
-    public String[] saveDataFromTheProfilePage() {
-        waitUntilElementIsVisible(By.cssSelector(".itemprofilefit #fieldobjconfession"), 40);
-        String[] array;
-        //  array1 = new String[6];
-        Boolean familySign;
-        familySign = true;
-        array = saveDataFromTheProfileOrFamilyPage(familySign);
-        return array;
-    }*/
-
-    public String[] saveDataFromTheProfileOrFamilyPage(Boolean sign) {
-
-        String [] profileData;
-        profileData = new String[6];
-        //---------------Save data from the Profile page-------------
-        //profileConfession
-        profileData[0] = driver.findElement(By.id("fieldobjconfession")).getText();
-
-        //profileLanguage
-        profileData[1] = driver.findElement(By.id("fieldobjlanguages")).getText();
-
-        //profileFoodPreference
-        profileData[2] = driver.findElement(By.id("fieldobjfoodPreferences")).getText();
-
-        //profileEmail
-        profileData[3] = driver.findElement(By.id("fieldobjelMail")).getText();
-
-        if (sign) {
-            //profileFamilyName
-            profileData[4] = driver.findElement(By.id("fieldobjfamilyName")).getText();
-        }
-        else {
-            //profileName
-            profileData[4]  = driver.findElement(By.id("titleprofile")).getText();
-        }
-
-        //profileFamilyDescription
-        profileData[5] = driver.findElement(By.id("fieldobjfamilyDescription")).getText();
-
-        return profileData;
     }
 }
