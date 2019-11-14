@@ -14,8 +14,8 @@ public class HomePageTests extends TestBase{
 
     @BeforeMethod
     public void initTests() {
-        homePage = new HomePageHelper(driver);
-        homePageAuth = new HomePageAuthHelper(driver);
+      /* homePage = new HomePageHelper(driver);
+        homePageAuth = new HomePageAuthHelper(driver);*/
 
         homePageAuth = PageFactory.initElements(driver, HomePageAuthHelper.class);
         homePage = PageFactory.initElements(driver, HomePageHelper.class);
@@ -36,13 +36,13 @@ public class HomePageTests extends TestBase{
     @Test(enabled = true)
     public void singleFilterHolidays() throws InterruptedException {
 
-        homePage.waitThatFilterByHolidayAndAllOptionsAreLoaded();
+        homePage.waitThatFilterByHolidayAndAllOptionsAreLoaded()
 
-        homePage.verifyTheStatusClearButton();
+        .verifyTheStatusClearButton()
 
-        homePage.getSelectElementFilterByHoliday();
+        .getSelectElementFilterByHoliday()
 
-        homePage.waitThatFilterHolidayIsChosenAndAllEventsByFilterAreLoaded();
+        .waitThatFilterHolidayIsChosenAndAllEventsByFilterAreLoaded();
 
         Assert.assertTrue(homePage.getAllHolidaysValuesForAllEventsChosenByFilterShabbat());
 
@@ -51,13 +51,13 @@ public class HomePageTests extends TestBase{
     @Test(enabled = true)
     public void singleFilterFood() throws InterruptedException {
 
-        homePage.waitThatFilterByFoodAndAllOptionsAreLoaded();
+        homePage.waitThatFilterByFoodAndAllOptionsAreLoaded()
 
-        homePage.verifyTheStatusClearButton();
+        .verifyTheStatusClearButton()
 
-        homePage.getSelectElementFilterByFood();
+        .getSelectElementFilterByFood()
 
-        homePage.waitThatFilterFoodIsChosenAndAllEventsByFilterAreLoaded();
+        .waitThatFilterFoodIsChosenAndAllEventsByFilterAreLoaded();
 
         Assert.assertTrue(homePage.getAllHolidaysValuesForAllEventsChosenByFilterKosher());
     }
@@ -65,13 +65,13 @@ public class HomePageTests extends TestBase{
     @Test(enabled = true)
     public void singleFilterLanguage() throws InterruptedException {
 
-        homePage.waitThatFilterByLanguageAndAllOptionsAreLoaded();
+        homePage.waitThatFilterByLanguageAndAllOptionsAreLoaded()
 
-        homePage.verifyTheStatusClearButton();
+        .verifyTheStatusClearButton()
 
-        homePage.getSelectElementFilterByLanguage();
+        .getSelectElementFilterByLanguage()
 
-        homePage.waitThatFilterLanguageIsChosenAndAllEventsByFilterAreLoaded();
+        .waitThatFilterLanguageIsChosenAndAllEventsByFilterAreLoaded();
 
         Assert.assertTrue(homePage.getAllHolidaysValuesForAllEventsChosenByFilterEnglish());
     }

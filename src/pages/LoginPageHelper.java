@@ -13,17 +13,11 @@ public class LoginPageHelper extends PageBase {
     @FindBy(id = "idsignin")
     WebElement loginIcon;
 
-  /*  @FindBy(id = "clickreg")
-    WebElement registrationLink;*/
-
     @FindBy(id = "logininput")
     WebElement loginField;
 
     @FindBy(id = "passwordinput")
     WebElement passwordField;
-
-   // @FindBy(id = "ihome")
-   // WebElement iconHomForAuthorizedUser;
 
     @FindBy(id = "wrongloginorpassword")
     WebElement wrongAuth;
@@ -35,26 +29,26 @@ public class LoginPageHelper extends PageBase {
         super(driver);
     }
 
-    public void openLoginPage() {
+    public LoginPageHelper openLoginPage() {
         openPage(loginIcon, signInButton);
+        return this;
     }
 
-    public void waitUntilLoginPageIsLoaded() {
+    public LoginPageHelper waitUntilLoginPageIsLoaded() {
         waitUntilPageIsLoaded(signInButton, 20);
+        return this;
     }
 
-  /*  public Boolean correctPageIsLoaded() {
-       return registrationLink.getText().contains("registration");
-    }*/
-
-    public void initLoginTests(String login, String passw) {
+    public LoginPageHelper initLoginTests(String login, String passw) {
         loginField.sendKeys(login);
         passwordField.sendKeys(passw);
         signInButton.click();
+        return this;
     }
 
-    public void closeLoginWindowByX() {
+    public LoginPageHelper closeLoginWindowByX() {
         closeByXButton.click();
+        return this;
     }
 
     public boolean loginToTheSystemIncorrect() {

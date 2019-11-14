@@ -20,8 +20,9 @@ public class FamilyPageHelper extends PageBase {
    /* public void openFamilyProfilePage() {
         openPage("family", By.id("fieldobjconfession"));
     }*/
-    public void openFamilyProfilePage() {
+    public FamilyPageHelper openFamilyProfilePage() {
         openPage(familyIcon, confessionField);
+        return this;
     }
 
     public String[] saveDataFromTheFamilyPage() {

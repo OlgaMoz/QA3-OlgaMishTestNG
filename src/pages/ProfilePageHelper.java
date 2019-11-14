@@ -34,8 +34,9 @@ public class ProfilePageHelper extends PageBase {
         super(driver);
     }
 
-    public void openProfilePage() {
+    public ProfilePageHelper openProfilePage() {
         openPage(profileButton, profilePhoto);
+        return this;
     }
 
     public String[] saveDataFromTheProfilePage() {
@@ -62,7 +63,7 @@ public class ProfilePageHelper extends PageBase {
         return profileFamilyName;
     }
 
-    public void changeLastName(String lastName) throws InterruptedException {
+    public ProfilePageHelper changeLastName(String lastName) throws InterruptedException {
 
         openElementByLocator(editButton);
         waitUntilElementIsVisible(helpSelectInfoInProfile, 50);
@@ -72,6 +73,7 @@ public class ProfilePageHelper extends PageBase {
         fieldEditedLastName.clear();
         fieldEditedLastName.sendKeys(lastName);
         //Thread.sleep(7000);
+        return this;
     }
     public String newLastNameGeneration() {
         waitUntilElementIsClickable(fieldSavedLastName, 50);

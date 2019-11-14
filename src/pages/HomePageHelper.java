@@ -61,15 +61,16 @@ public class HomePageHelper extends PageBase {
         super(driver);
     }
 
-    public void waitUntilHomePageIsLoaded(){
+    public HomePageHelper waitUntilHomePageIsLoaded(){
         waitUntilPageIsLoaded(loginIcon,20);
+        return this;
     }
 
-    public Boolean correctHomePageIsLoaded(){
+    public boolean correctHomePageIsLoaded(){
         return correctPageIsLoaded(listEvent, "List events");
     }
 
-    public Boolean userIsNotLoggedIn(){
+    public boolean userIsNotLoggedIn(){
         return correctPageIsLoaded(loginIcon, "Login");
     }
 
@@ -85,45 +86,55 @@ public class HomePageHelper extends PageBase {
        return getAllHolidaysValuesForAllEventsChosenByFilter(listHolidaysLanguage,"English");
     }
 
-    public void waitThatFilterByHolidayAndAllOptionsAreLoaded() throws InterruptedException {
+    public HomePageHelper waitThatFilterByHolidayAndAllOptionsAreLoaded() throws InterruptedException {
         waitThatFilterAndAllOptionsAreLoaded(filterHolidays, optionsHolidays);
+        return this;
     }
 
-    public void waitThatFilterByFoodAndAllOptionsAreLoaded() throws InterruptedException {
+    public HomePageHelper waitThatFilterByFoodAndAllOptionsAreLoaded() throws InterruptedException {
         waitThatFilterAndAllOptionsAreLoaded(filterFood, optionsFood);
+        return this;
     }
 
-    public void waitThatFilterByLanguageAndAllOptionsAreLoaded() throws InterruptedException {
+    public HomePageHelper waitThatFilterByLanguageAndAllOptionsAreLoaded() throws InterruptedException {
         waitThatFilterAndAllOptionsAreLoaded(filterLanguages, optionsLanguage);
+        return this;
     }
 
-    public void getSelectElementFilterByHoliday() throws InterruptedException {
+    public HomePageHelper getSelectElementFilterByHoliday() throws InterruptedException {
         getSelectElementFilterBy(filterHolidays, "Shabbat", optionsHolidays);
+        return this;
     }
 
-    public void getSelectElementFilterByFood() throws InterruptedException {
+    public HomePageHelper getSelectElementFilterByFood() throws InterruptedException {
         getSelectElementFilterBy(filterFood, "Kosher", optionsFood);
+        return this;
     }
 
-    public void getSelectElementFilterByLanguage() throws InterruptedException {
+    public HomePageHelper getSelectElementFilterByLanguage() throws InterruptedException {
         getSelectElementFilterBy(filterLanguages, "English", optionsLanguage);
+        return this;
     }
 
-    public void waitThatFilterHolidayIsChosenAndAllEventsByFilterAreLoaded() {
+    public HomePageHelper waitThatFilterHolidayIsChosenAndAllEventsByFilterAreLoaded() {
         waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(chosenFilterHolidays);
+        return this;
     }
 
-    public void waitThatFilterFoodIsChosenAndAllEventsByFilterAreLoaded() {
+    public HomePageHelper waitThatFilterFoodIsChosenAndAllEventsByFilterAreLoaded() {
         waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(chosenFilterFood);
+        return this;
     }
 
-    public void waitThatFilterLanguageIsChosenAndAllEventsByFilterAreLoaded() {
+    public HomePageHelper waitThatFilterLanguageIsChosenAndAllEventsByFilterAreLoaded() {
         waitThatFilterIsChosenAndAllEventsByFiterAreLoaded(chosenFilterLanguage);
+        return this;
     }
 
-    public void verifyTheStatusClearButton() {
+    public HomePageHelper verifyTheStatusClearButton() {
 
         System.out.println("is displayed: " + clearFilterButton.isDisplayed());
         System.out.println("is enabled: " + clearFilterButton.isEnabled());
+        return this;
     }
 }

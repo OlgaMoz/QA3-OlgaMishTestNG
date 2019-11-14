@@ -16,7 +16,8 @@ public class IntroPageHelper extends PageBase{
         super(driver);
     }
 
-    public void openIntroPage() {
+    public IntroPageHelper openIntroPage() {
         openPage(closedIntro, headerFilters);
+        return this;
     }
 }

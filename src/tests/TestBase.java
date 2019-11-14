@@ -24,7 +24,7 @@ public class TestBase {
     public void driverInit() {
         driver = new ChromeDriver();
         driver.get("https://mishpahug.co.il/");
-        introPage = new IntroPageHelper(driver);
+       // introPage = new IntroPageHelper(driver);
 
         introPage = PageFactory.initElements(driver, IntroPageHelper.class);
 

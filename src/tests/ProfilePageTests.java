@@ -17,11 +17,11 @@ public class ProfilePageTests<profilePage> extends TestBase {
 
     @BeforeMethod
     public void initTests() {
-        homePage = new HomePageHelper(driver);
+      /*  homePage = new HomePageHelper(driver);
         loginPage = new LoginPageHelper(driver);
         homePageAuth = new HomePageAuthHelper(driver);
         profilePage = new ProfilePageHelper(driver);
-        familyPage = new FamilyPageHelper(driver);
+        familyPage = new FamilyPageHelper(driver);*/
 
         profilePage = PageFactory.initElements(driver, ProfilePageHelper.class);
         familyPage = PageFactory.initElements(driver, FamilyPageHelper.class);
@@ -31,8 +31,8 @@ public class ProfilePageTests<profilePage> extends TestBase {
 
 
         homePage.waitUntilHomePageIsLoaded();
-        loginPage.openLoginPage();
-        loginPage.initLoginTests(LOGIN, PASSWORD);
+        loginPage.openLoginPage()
+        .initLoginTests(LOGIN, PASSWORD);
         profilePage.openProfilePage();
        // driver.manage().window().maximize();
     }

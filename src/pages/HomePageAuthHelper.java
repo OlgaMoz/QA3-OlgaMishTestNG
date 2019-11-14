@@ -18,7 +18,8 @@ public class HomePageAuthHelper extends PageBase {
         return profileIcon.getAttribute("title").contains(LOGIN);
     }
 
-    public void waitUntilHomePageAuthIsLoaded() {
+    public HomePageAuthHelper waitUntilHomePageAuthIsLoaded() {
         waitUntilPageIsLoaded(profileIcon, 30);
+        return this;
     }
 }
